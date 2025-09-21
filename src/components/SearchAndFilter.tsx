@@ -34,9 +34,9 @@ export default function SearchAndFilter({
 		if (search.trim()) {
 			filtered = filtered.filter(
 				(item) =>
-					item.name.toLowerCase().includes(search.toLowerCase()) ||
+					item.title.toLowerCase().includes(search.toLowerCase()) ||
 					item.description.toLowerCase().includes(search.toLowerCase()) ||
-					item.url.toLowerCase().includes(search.toLowerCase())
+					item.source.toLowerCase().includes(search.toLowerCase())
 			);
 		}
 
@@ -74,7 +74,7 @@ export default function SearchAndFilter({
 							type="text"
 							value={searchTerm}
 							onChange={(e) => handleSearchChange(e.target.value)}
-							placeholder="Search by name or description..."
+							placeholder="Search by title or description..."
 							className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
 						/>
 					</div>
@@ -118,7 +118,7 @@ export default function SearchAndFilter({
 					<span>Active filters:</span>
 					{searchTerm && (
 						<span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-							Search: "{searchTerm}"
+							Search: &quot;{searchTerm}&quot;
 						</span>
 					)}
 					{statusFilter !== "all" && (

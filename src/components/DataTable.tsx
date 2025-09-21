@@ -10,7 +10,7 @@ export default function DataTable({
 	selectedItems,
 	onSelectionChange,
 }: DataTableProps) {
-	const [sortField, setSortField] = useState<keyof Item>("name");
+	const [sortField, setSortField] = useState<keyof Item>("title");
 	const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
 	const handleSort = (field: keyof Item) => {
@@ -37,7 +37,7 @@ export default function DataTable({
 
 	const handleSelectAll = (checked: boolean) => {
 		items.forEach((item) => {
-			onSelectionChange(item.id, checked);
+			onSelectionChange(item._id, checked);
 		});
 	};
 
@@ -86,10 +86,10 @@ export default function DataTable({
 							</th>
 							<th
 								className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
-								onClick={() => handleSort("name")}
+								onClick={() => handleSort("title")}
 							>
-								Name{" "}
-								{sortField === "name" && (sortDirection === "asc" ? "↑" : "↓")}
+								Title{" "}
+								{sortField === "title" && (sortDirection === "asc" ? "↑" : "↓")}
 							</th>
 							<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 								Description
@@ -121,24 +121,24 @@ export default function DataTable({
 					<tbody className="bg-white divide-y divide-gray-200">
 						{sortedItems.map((item) => (
 							<tr
-								key={item.id}
+								key={item._id}
 								className={`hover:bg-gray-50 transition-colors ${
-									selectedItems.includes(item.id) ? "bg-blue-50" : ""
+									selectedItems.includes(item._id) ? "bg-blue-50" : ""
 								}`}
 							>
 								<td className="px-6 py-4 whitespace-nowrap">
 									<input
 										type="checkbox"
-										checked={selectedItems.includes(item.id)}
+										checked={selectedItems.includes(item._id)}
 										onChange={(e) =>
-											onSelectionChange(item.id, e.target.checked)
+											onSelectionChange(item._id, e.target.checked)
 										}
 										className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
 									/>
 								</td>
 								<td className="px-6 py-4 whitespace-nowrap">
-									<div className="text-sm font-medium text-gray-900">
-										{item.name}
+									<div className="text-sm font-medium max-w-xs truncate text-gray-900">
+										{item.title}
 									</div>
 								</td>
 								<td className="px-6 py-4">
@@ -146,17 +146,17 @@ export default function DataTable({
 										{item.description}
 									</div>
 								</td>
-								<td className="px-6 py-4 whitespace-nowrap">
+								<td className="px-6 py-4 whitespace-nowrap max-w-[200px] truncate">
 									<a
-										href={item.url}
+										href={item.source}
 										target="_blank"
 										rel="noopener noreferrer"
 										className="text-sm text-blue-500 hover:text-blue-700 underline"
 									>
-										{item.url}
+										{item.source}
 									</a>
 								</td>
-								<td className="px-6 py-4 whitespace-nowrap">
+								<td className="px-6 py-4 whitespace-nowrap max-w-xs truncate">
 									<span
 										className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(
 											item.status

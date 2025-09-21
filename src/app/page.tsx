@@ -5,7 +5,6 @@ import DataTable from "@/components/DataTable";
 import ActionModal from "@/components/ActionModal";
 import SearchAndFilter from "@/components/SearchAndFilter";
 import { Item, Action } from "@/types/data";
-import { mockItems } from "@/lib/mockData";
 
 export default function Home() {
 	const [items, setItems] = useState<Item[]>([]);
@@ -21,10 +20,15 @@ export default function Home() {
 		item: null,
 	});
 
-	// Load mock data on component mount
+	const getItems = async () => {
+		const result = await fetch("http://localhost:4000/api/news");
+		const data = await result.json();
+		setItems(data);
+		setFilteredItems(data);
+	};
+
 	useEffect(() => {
-		setItems(mockItems);
-		setFilteredItems(mockItems);
+		getItems();
 	}, []);
 
 	const handleAction = (action: Action, item: Item) => {
@@ -51,11 +55,11 @@ export default function Home() {
 		switch (action) {
 			case "delete":
 				// Remove the item from both arrays
-				const updatedItems = items.filter((i) => i.id !== item.id);
+				const updatedItems = items.filter((i) => i._id !== item._id);
 				setItems(updatedItems);
-				setFilteredItems((prev) => prev.filter((i) => i.id !== item.id));
+				setFilteredItems((prev) => prev.filter((i) => i._id !== item._id));
 				// Remove from selected items if it was selected
-				setSelectedItems((prev) => prev.filter((id) => id !== item.id));
+				setSelectedItems((prev) => prev.filter((id) => id !== item._id));
 				break;
 
 			case "edit":
@@ -90,11 +94,11 @@ export default function Home() {
 		if (selectedItems.length === 0) return;
 
 		const updatedItems = items.filter(
-			(item) => !selectedItems.includes(item.id)
+			(item) => !selectedItems.includes(item._id)
 		);
 		setItems(updatedItems);
 		setFilteredItems((prev) =>
-			prev.filter((item) => !selectedItems.includes(item.id))
+			prev.filter((item) => !selectedItems.includes(item._id))
 		);
 		setSelectedItems([]);
 	};

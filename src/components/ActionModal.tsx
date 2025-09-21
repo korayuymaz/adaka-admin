@@ -21,9 +21,9 @@ export default function ActionModal({
 						<div className="space-y-4">
 							<div>
 								<label className="block text-sm font-medium text-gray-700">
-									Name
+									Title
 								</label>
-								<p className="mt-1 text-sm text-gray-900">{item.name}</p>
+								<p className="mt-1 text-sm text-gray-900">{item.title}</p>
 							</div>
 							<div>
 								<label className="block text-sm font-medium text-gray-700">
@@ -60,12 +60,12 @@ export default function ActionModal({
 									URL
 								</label>
 								<a
-									href={item.url}
+									href={item.source}
 									target="_blank"
 									rel="noopener noreferrer"
 									className="mt-1 text-sm text-blue-500 hover:text-blue-700 underline"
 								>
-									{item.url}
+									{item.source}
 								</a>
 							</div>
 						</div>
@@ -78,14 +78,14 @@ export default function ActionModal({
 				return {
 					title: "Edit Item",
 					content: (
-						<div className="space-y-4">
+						<div className="space-y-4 text-black">
 							<div>
 								<label className="block text-sm font-medium text-gray-700">
-									Name
+									Title
 								</label>
 								<input
 									type="text"
-									defaultValue={item.name}
+									defaultValue={item.title}
 									className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 								/>
 							</div>
@@ -105,7 +105,7 @@ export default function ActionModal({
 								</label>
 								<input
 									type="text"
-									defaultValue={item.url}
+									defaultValue={item.source}
 									className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 								/>
 							</div>
@@ -154,7 +154,8 @@ export default function ActionModal({
 										</h3>
 										<div className="mt-2 text-sm text-red-700">
 											<p>
-												This action cannot be undone. The item &quot;{item.name}
+												This action cannot be undone. The item &quot;
+												{item.title}
 												&quot; will be permanently deleted.
 											</p>
 										</div>

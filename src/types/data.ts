@@ -1,11 +1,11 @@
 export interface Item {
-	id: string;
-	name: string;
+	_id: string;
+	title: string;
 	description: string;
 	status: "active" | "inactive" | "pending";
 	createdAt: string;
 	updatedAt: string;
-	url: string;
+	source: string;
 }
 
 export type Action = "view" | "edit" | "delete" | "select";
