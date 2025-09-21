@@ -27,6 +27,17 @@ export default function Home() {
 		setFilteredItems(data);
 	};
 
+	const updateStatus = async (item: Item) => {
+		const result = await fetch(`http://localhost:4000/api/news/${item._id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(item),
+		});
+		console.log(result);
+	};
+
 	useEffect(() => {
 		getItems();
 	}, []);
@@ -47,9 +58,14 @@ export default function Home() {
 		});
 	};
 
+	const handleStatusChange = (item: Item) => {
+		console.log(item);
+		updateStatus(item);
+	};
+
 	const handleModalConfirm = () => {
 		const { action, item } = modalState;
-
+		console.log(action, item);
 		if (!item) return;
 
 		switch (action) {
@@ -66,6 +82,7 @@ export default function Home() {
 				// In a real app, you would update the item here
 				// For now, we'll just close the modal
 				console.log("Edit item:", item);
+				updateStatus(item);
 				break;
 
 			case "view":
@@ -298,6 +315,7 @@ export default function Home() {
 				action={modalState.action}
 				item={modalState.item}
 				onConfirm={handleModalConfirm}
+				handleStatusChange={handleStatusChange}
 			/>
 		</div>
 	);

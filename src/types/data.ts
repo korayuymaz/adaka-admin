@@ -23,4 +23,5 @@ export interface ActionModalProps {
 	action: Action;
 	item: Item | null;
 	onConfirm: () => void;
+	handleStatusChange: (item: Item) => void;
 }

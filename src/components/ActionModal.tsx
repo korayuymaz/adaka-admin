@@ -1,6 +1,6 @@
 "use client";
 
-import { ActionModalProps } from "@/types/data";
+import { ActionModalProps, Item } from "@/types/data";
 import { formatDate } from "@/lib/mockData";
 
 export default function ActionModal({
@@ -9,6 +9,7 @@ export default function ActionModal({
 	action,
 	item,
 	onConfirm,
+	handleStatusChange,
 }: ActionModalProps) {
 	if (!isOpen || !item) return null;
 
@@ -114,6 +115,10 @@ export default function ActionModal({
 									Status
 								</label>
 								<select
+									onChange={(e) => {
+										item.status = e.target.value as Item["status"];
+										handleStatusChange(item);
+									}}
 									defaultValue={item.status}
 									className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 								>
