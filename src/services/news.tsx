@@ -1,4 +1,5 @@
 import { Item } from "@/types/data";
+import "dotenv/config";
 
 const API_URL = process.env.BACKEND_URL || "http://localhost:4000";
 
