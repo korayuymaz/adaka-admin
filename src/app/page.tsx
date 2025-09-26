@@ -5,6 +5,7 @@ import DataTable from "@/components/DataTable";
 import ActionModal from "@/components/ActionModal";
 import SearchAndFilter from "@/components/SearchAndFilter";
 import { Item, Action } from "@/types/data";
+import { newsService } from "@/services/news";
 
 export default function Home() {
 	const [items, setItems] = useState<Item[]>([]);
@@ -21,20 +22,13 @@ export default function Home() {
 	});
 
 	const getItems = async () => {
-		const result = await fetch("http://localhost:4000/api/news");
-		const data = await result.json();
+		const data = await newsService.getNews();
 		setItems(data);
 		setFilteredItems(data);
 	};
 
 	const updateStatus = async (item: Item) => {
-		const result = await fetch(`http://localhost:4000/api/news/${item._id}`, {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(item),
-		});
+		const result = await newsService.updateNews(item._id, item);
 		console.log(result);
 	};
 
@@ -59,7 +53,6 @@ export default function Home() {
 	};
 
 	const handleStatusChange = (item: Item) => {
-		console.log(item);
 		updateStatus(item);
 	};
 
@@ -108,7 +101,9 @@ export default function Home() {
 	};
 
 	const handleBulkDelete = () => {
-		if (selectedItems.length === 0) return;
+		return;
+		// TODO: Implement bulk delete
+		/* if (selectedItems.length === 0) return;
 
 		const updatedItems = items.filter(
 			(item) => !selectedItems.includes(item._id)
@@ -118,6 +113,7 @@ export default function Home() {
 			prev.filter((item) => !selectedItems.includes(item._id))
 		);
 		setSelectedItems([]);
+		*/
 	};
 
 	return (
