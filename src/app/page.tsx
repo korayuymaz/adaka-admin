@@ -28,8 +28,7 @@ export default function Home() {
 	};
 
 	const updateStatus = async (item: Item) => {
-		const result = await newsService.updateNews(item._id, item);
-		console.log(result);
+		return await newsService.updateNews(item._id, item);
 	};
 
 	useEffect(() => {
@@ -58,7 +57,6 @@ export default function Home() {
 
 	const handleModalConfirm = () => {
 		const { action, item } = modalState;
-		console.log(action, item);
 		if (!item) return;
 
 		switch (action) {
@@ -74,7 +72,6 @@ export default function Home() {
 			case "edit":
 				// In a real app, you would update the item here
 				// For now, we'll just close the modal
-				console.log("Edit item:", item);
 				updateStatus(item);
 				break;
 

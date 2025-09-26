@@ -16,7 +16,10 @@ export class NewsService {
 
 	async updateNews(id: string, news: Item) {
 		const response = await fetch(`${this.apiUrl}/${id}`, {
-			method: "PUT",
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify(news),
 		});
 		return response.json();
