@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { DataTableProps, Action, Item } from "@/types/data";
-import { getStatusColor, formatDate } from "@/lib/mockData";
+import { getStatusColor, formatDate } from "@/lib/utils";
 
 export default function DataTable({
 	items,

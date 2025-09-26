@@ -1,7 +1,7 @@
 "use client";
 
 import { ActionModalProps, Item } from "@/types/data";
-import { formatDate } from "@/lib/mockData";
+import { formatDate } from "@/lib/utils";
 
 export default function ActionModal({
 	isOpen,
