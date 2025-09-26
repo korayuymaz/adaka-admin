@@ -1,12 +1,12 @@
 import { Item } from "@/types/data";
 
-const API_URL = process.env.BACKEND_URL || "http://localhost:4000/api/news";
+const API_URL = process.env.BACKEND_URL || "http://localhost:4000";
 
 export class NewsService {
 	private apiUrl: string;
 
 	constructor() {
-		this.apiUrl = `${API_URL}`;
+		this.apiUrl = `${API_URL}/api/news`;
 	}
 
 	async getNews() {
