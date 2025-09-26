@@ -1,12 +1,12 @@
 import { Item } from "@/types/data";
 
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export class NewsService {
 	private apiUrl: string;
 
 	constructor() {
-		this.apiUrl = `${API_URL}/api/news`;
+		this.apiUrl = `${API_URL}/news`;
 	}
 
 	async getNews() {
