@@ -1,7 +1,6 @@
 import { Item } from "@/types/data";
-import "dotenv/config";
 
-const API_URL = process.env.BACKEND_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export class NewsService {
 	private apiUrl: string;
